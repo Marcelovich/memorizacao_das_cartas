@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>Memoria</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+        }
+
+        input {
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Teste sua memória</h1>
+
+    <img id="figura" src="costas.jpg" alt="Imagem de costas" draggable="false" style="width: 250px; height: 350px;">
+
+    <br><button id="botaoInicio" onclick="iniciarJogo()">Iniciar</button><br>
+
+
+    <div id="tabelaResultado" style="display: none;">
+        <table>
+            <h3>Resultado</h3>
+            <tbody>
+                <tr>
+                    <td>Carta 1 = </td>
+                    <td><input type="text" name="resposta" id="carta_1"></td>
+                    <td>Carta 2 = </td>
+                    <td><input type="text" name="resposta" id="carta_2"></td>
+                </tr>
+                <tr>
+                    <td>Carta 3 = </td>
+                    <td><input type="text" name="resposta" id="carta_3"></td>
+                    <td>Carta 4 = </td>
+                    <td><input type="text" name="resposta" id="carta_4"></td>
+                </tr>
+                <tr>
+                    <td>Carta 5 = </td>
+                    <td><input type="text" name="resposta" id="carta_5"></td>
+                    <td>Carta 6 = </td>
+                    <td><input type="text" name="resposta" id="carta_6"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br><button onclick="verificar()">Enviar</button>
+    </div>
+
+
+</body>
+
+<script>
+    var cartas = [
+        "carta_1.jpg", "costas.jpg",
+        "carta_2.jpg", "costas.jpg",
+        "carta_3.jpg", "costas.jpg",
+        "carta_4.jpg", "costas.jpg",
+        "carta_5.jpg", "costas.jpg",
+        "carta_6.jpg", "costas.jpg"
+    ];
+
+    var figuraInicial = "costas.jpg";
+    var index = 0;
+    var timer;
+
+    function iniciarJogo() {
+        mostrarCarta();
+        timer = setInterval(mostrarCarta, 1000);
+        desativarBotaoInicio();
+    }
+
+    function mostrarCarta() {
+        var cartaAtual = cartas[index];
+        document.getElementById('figura').src = cartaAtual;
+        index++;
+        if (index >= cartas.length) {
+            clearInterval(timer);
+            document.getElementById('tabelaResultado').style.display = "block";
+        }
+    }
+
+    function verificar() {
+
+        var respostas = document.getElementsByName('resposta');
+
+        var resposta1 = respostas[0].value;
+        var resposta2 = respostas[1].value;
+        var resposta3 = respostas[2].value;
+        var resposta4 = respostas[3].value;
+        var resposta5 = respostas[4].value;
+        var resposta6 = respostas[5].value;
+
+        if (resposta1 === "1") {
+            document.getElementById("carta_1").style.backgroundColor = "#ADD8E6";
+        }
+        else {
+            document.getElementById("carta_1").style.backgroundColor = "#FF7F7F";
+        }
+
+        if (resposta2 === "8") {
+            document.getElementById("carta_2").style.backgroundColor = "#ADD8E6";
+        }
+        else {
+            document.getElementById("carta_2").style.backgroundColor = "#FF7F7F";
+        }
+
+        if (resposta3 === "6") {
+            document.getElementById("carta_3").style.backgroundColor = "#ADD8E6";
+        }
+        else {
+            document.getElementById("carta_3").style.backgroundColor = "#FF7F7F";
+        }
+
+        if (resposta4 === "4") {
+            document.getElementById("carta_4").style.backgroundColor = "#ADD8E6";
+        }
+        else {
+            document.getElementById("carta_4").style.backgroundColor = "#FF7F7F";
+        }
+
+        if (resposta5 === "9") {
+            document.getElementById("carta_5").style.backgroundColor = "#ADD8E6";
+        }
+        else {
+            document.getElementById("carta_5").style.backgroundColor = "#FF7F7F";
+        }
+
+        if (resposta6 === "7") {
+            document.getElementById("carta_6").style.backgroundColor = "#ADD8E6";
+        }
+        else {
+            document.getElementById("carta_6").style.backgroundColor = "#FF7F7F";
+        }
+    }
+
+    function desativarBotaoInicio() {
+        var botaoInicio = document.getElementById("botaoInicio");
+        botaoInicio.style.display = "none";
+    }
+
+</script>
+
+</html>
